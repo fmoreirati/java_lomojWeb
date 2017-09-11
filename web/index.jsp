@@ -26,6 +26,7 @@
                         <li><a href="index.jsp">Inicio</a></li>
                         <li><a href="?#produtos">Produtos</a></li>
                         <li><a href="?#lojas">Lojas</a></li>
+                        <li><a href="index.jsp?p=cadFunc">CadFunc</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="index.jsp?p=cadCliente">Cadastro</a></li>
@@ -41,6 +42,9 @@
             <c:choose>
                 <c:when test="${param.p == 'cadCliente'}">
                     <c:set var="pagina" value="formCliente.jsp"/>
+                </c:when>
+                <c:when test="${param.p == 'cadFunc'}">
+                    <c:set var="pagina" value="formFuncionario.jsp"/>
                 </c:when>
                 <c:when test="${param.p == 'login'}">
                     <c:set var="pagina" value="login.jsp"/>
