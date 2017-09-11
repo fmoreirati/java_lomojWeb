@@ -23,13 +23,13 @@
                 </div>
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
-                        <li><a href="?#inicio">Inicio</a></li>
+                        <li><a href="index.jsp">Inicio</a></li>
                         <li><a href="?#produtos">Produtos</a></li>
                         <li><a href="?#lojas">Lojas</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="?cadCliente">Cadastro</a></li>
-                        <li><a href="?login">Login</a></li>
+                        <li><a href="index.jsp?p=cadCliente">Cadastro</a></li>
+                        <li><a href="index.jsp?p=login">Login</a></li>
                     </ul>
                 </div>
             </div>
@@ -38,29 +38,19 @@
             <h2>LojaWEB.</h2><h3> Tudo em um só lugar...</h3>
         </header>
         <section class="container row">
-            <!-- busca de parametro P
-            <c:if test="${not empty param.p}">
-                <c:choose>
-                    <c:when test="${param.p == 'cadCliente'}">
-                        <c:set var="pagina" value="formCliente.jsp"/>
-                    </c:when>
-                    <c:otherwise>
-                        <c:set var="pagina" value="inicio.jsp"/>
-                    </c:otherwise>
-                </c:choose>
-                <c:import url="${pagina}"/>
-            </c:if>-->
-                        
-                <c:choose>
-                    <c:when test="${param.cadCliente != null}">
-                        <c:set var="pagina" value="formCliente.jsp"/>
-                    </c:when>
-                    <c:otherwise>
-                        <c:set var="pagina" value="inicio.jsp"/>
-                    </c:otherwise>
-                </c:choose>
-                <c:import url="${pagina}"/>
-      
+            <c:choose>
+                <c:when test="${param.p == 'cadCliente'}">
+                    <c:set var="pagina" value="formCliente.jsp"/>
+                </c:when>
+                <c:when test="${param.p == 'login'}">
+                    <c:set var="pagina" value="login.jsp"/>
+                </c:when>
+                <c:otherwise>
+                    <c:set var="pagina" value="inicio.jsp"/>
+                </c:otherwise>
+            </c:choose>
+            <c:import url="${pagina}"/>
+
         </section>
         <footer class="row text-center">
             <h5> Feito por Fabiano Moreira</h5>
@@ -68,5 +58,6 @@
         <!-- Scripts-->
         <script src="js/jquery-3.2.1.slim.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
+
     </body>
 </html>
