@@ -11,5 +11,9 @@ public class CtrlCliente {
         ClienteDAO clienteDAO = new ClienteDAO();
         return clienteDAO.findCliente(email, pws);
     }
+    public void salvar(Cliente cliente) throws SQLException, Exception{
+        ClienteDAO clienteDAO = new ClienteDAO();
+        clienteDAO.create(cliente);
+    }
     
 }

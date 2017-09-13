@@ -24,7 +24,7 @@ public class FrontController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
 
         String parametro = request.getParameter("logica");
-        String nomeDaClasse = "br.com.webloja.logica." + parametro;
+        String nomeDaClasse = "br.com.lojaWEB.logica." + parametro;
         try {
             Class<?> classe = Class.forName(nomeDaClasse);
             Logica logica = (Logica) classe.newInstance();

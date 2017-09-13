@@ -1,8 +1,10 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class="container">
     <c:import url="msg.jsp"/>
     <form action="sys" method="POST" class="form">
         <input type="hidden" name="action" value="cad">
+        <input type="hidden" name="logica" value="ClienteLogica">
         <div class="container col-md-6">
             <legend>Cadastro de Cliente</legend>
             <legend>Dados Pessoais</legend>
@@ -17,34 +19,26 @@
             </div>
 
             <div class="form-group">
-                <label for="cpf">CPF</label>
-                <input type="number" name="cpf" min="00000000000" max="99999999999"class="form-control"  value="${cliente.cpfcnpj}">
+                <label for="pws1">Senha</label>
+                <input type="password" name="pws1" class="form-control">
             </div>
 
             <div class="form-group">
-                <label for="tel">Tel</label>
-                <input type="number" name="tel" class="form-control"  value="${cliente.tel}">
-            </div>
-
-            <div class="form-group">
-                <label for="pws">Senha</label>
-                <input type="password" name="pws" class="form-control">
-            </div>
-
-            <div class="form-group">
-                <label for="pws2">Confirmação Senha</label>
+                <label for="pws2">ConfirmaÃ§Ã£o Senha</label>
                 <input type="password" name="pws2" class="form-control">
             </div>
         </div>
+
         <div class="container col-md-6">
-            <legend>Dados Endereço</legend>
+            <legend>Dados EndereÃ§o</legend>
+            <%--
             <div class="form-group">
                 <label for="cep">CEP</label>
                 <input type="text" name="cep" class="form-control" id="cep" onblur="pesquisacep(this.value)"  value="${cliente.endereco.cep}">
             </div>
 
             <div class="form-group">
-                <label for="logradouro">Endereço</label>
+                <label for="logradouro">EndereÃ§o</label>
                 <input type="text" name="logradouro" class="form-control" id="rua" value="${cliente.endereco.logradouro}">
             </div>
 
@@ -62,7 +56,7 @@
                 <label for="uf">UF</label>
                 <input type="text" name="uf" class="form-control" id="uf" value="${cliente.endereco.uf}">
             </div>
-
+            --%>
             <div class="form-group">
                 <label for="numero">Numero</label>
                 <input type="text" name="numero" class="form-control">
@@ -79,5 +73,5 @@
             </div>
         </div>
     </form>
-        <script src="js/ceps.js"></script>
+    <script src="js/ceps.js"></script>
 </div>

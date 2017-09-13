@@ -2,6 +2,7 @@ package br.com.lojaWEB.logica;
 
 import br.com.lojaWEB.controller.CtrlCliente;
 import br.com.lojaWEB.model.Cliente;
+import java.sql.SQLException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -69,6 +70,8 @@ public class ClienteLogica implements Logica {
             try {
                 cliente.setNome(req.getParameter("nome").trim());
                 cliente.setEmail(req.getParameter("email").trim());
+                cliente.setNumero(req.getParameter("numero").trim());
+                cliente.setComplemento(req.getParameter("complemento").trim());
                 cliente.setPws(req.getParameter("pws1").trim());
                 if (cliente.isCliente(req.getParameter("pws2").trim())) {
                     CtrlCliente ctrCliente = new CtrlCliente();
@@ -80,9 +83,10 @@ public class ClienteLogica implements Logica {
                 req.setAttribute("erros", e.getMessage().replace(".\n", ".<br>"));
                 req.setAttribute("cliente", cliente);
             }
-            pagina = "index.jsp?p=formCliente";
+            pagina = "index.jsp?p=cadCliente";
         }//</editor-fold>
 
+        /*
         //Ação para apagar
         //<editor-fold>
         if (req.getParameter("action").equals("remove")) {
@@ -150,7 +154,7 @@ public class ClienteLogica implements Logica {
             req.setAttribute("cliente", cliente);
             pagina = "index.jsp?p=formCliente";
         }//</editor-fold>
-
+         */
         //Retorna para a pagina
         return pagina;
     }

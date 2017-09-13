@@ -93,53 +93,51 @@ public class Cliente implements Serializable {
         this.complemento = complemento;
     }
 
+    private String isDados() {
+        String erros = "";
+        if (nome.equals("")) {
+            erros += "Nome em branco.\n";
+        }
+        if (email.equals("")) {
+            erros += "E-mail em branco.\n";
+        }
+        if (numero.equals("")) {
+            erros += "Numero em branco.\n";
+        }
+        return erros;
+    }
+
+    private String isSenha(String confirmSenha) {
+        String erros = "";
+        if (pws.equals("")) {
+            erros += "Senha em branco.\n";
+        } else if (pws.length() < 5) {
+            erros += "Senha muito curta. Minimo de 6 caracteres.\n";
+        } else if (!pws.equals(confirmSenha)) {
+            erros += "Senhas diferentes.\n";
+        }
+
+        return erros;
+    }
+
+    public boolean isCliente(String pws) throws Exception {
+        String erros = isDados() + isSenha(pws);
+        if (!erros.equals("")) {
+            throw new Exception(erros);
+        }
+        return true;
+    }
+
     public boolean isCliente() throws Exception {
-        String erros = "";
-        if (nome.equals("")) {
-            erros += "Nome em branco.\n";
-        }
-        if (email.equals("")) {
-            erros += "E-mail em branco.\n";
-        }
+        String erros = isDados();
         if (!erros.equals("")) {
             throw new Exception(erros);
         }
         return true;
     }
 
-    public boolean isSenha(String confirmSenha) throws Exception {
-        String erros = "";
-        if (pws.equals("")) {
-            erros += "Senha em branco.\n";
-        } else if (pws.length() < 5) {
-            erros += "Senha muito curta. Minimo de 6 caracteres.\n";
-        } else if (!pws.equals(confirmSenha)) {
-            erros += "Senhas diferentes.\n";
-        }
-        if (!erros.equals("")) {
-            throw new Exception(erros);
-        }
-        return true;
-    }
-
-    public boolean isCliente(String confirmSenha) throws Exception {
-        String erros = "";
-        if (nome.equals("")) {
-            erros += "Nome em branco.\n";
-        }
-        if (email.equals("")) {
-            erros += "E-mail em branco.\n";
-        }
-        if (email.equals("")) {
-            erros += "E-mail em branco.\n";
-        }
-        if (pws.equals("")) {
-            erros += "Senha em branco.\n";
-        } else if (pws.length() < 5) {
-            erros += "Senha muito curta. Minimo de 6 caracteres.\n";
-        } else if (!pws.equals(confirmSenha)) {
-            erros += "Senhas diferentes.\n";
-        }
+    public boolean isPassword(String confirmaSenha) throws Exception {
+        String erros = isSenha(confirmaSenha);
         if (!erros.equals("")) {
             throw new Exception(erros);
         }

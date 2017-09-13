@@ -11,7 +11,7 @@ import javax.persistence.Query;
 
 public class ClienteDAO {
 
-    EntityManagerFactory emf = Persistence.createEntityManagerFactory("WebLojaPU");
+    EntityManagerFactory emf = Persistence.createEntityManagerFactory("LojaWEBPU");
     EntityManager em = emf.createEntityManager();
     EntityTransaction et = null;
 
@@ -112,16 +112,16 @@ public class ClienteDAO {
             em.close();
         }
     }
-    
-     //Busca cliente pela email e senha
+
+    //Busca cliente pela email e senha
     public Cliente findCliente(String email, String pws) {
         try {
             Query query = em.createQuery(""
                     + "select c from Cliente as c "
                     + "where c.email = :email and c.pws = :pws");
-            query.setParameter("email",email);
+            query.setParameter("email", email);
             query.setParameter("pws", pws);
-            return (Cliente)query.getSingleResult();        
+            return (Cliente) query.getSingleResult();
         } finally {
             em.close();
         }
