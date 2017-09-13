@@ -1,7 +1,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class="container">
     <c:import url="msg.jsp"/>
-    <form action="ServletCliente" method="POST" class="form">
+    <form action="sys" method="POST" class="form">
         <input type="hidden" name="action" value="cad">
         <div class="container col-md-6">
             <legend>Cadastro de Cliente</legend>

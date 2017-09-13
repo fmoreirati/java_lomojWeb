@@ -26,11 +26,14 @@
                         <li><a href="index.jsp">Inicio</a></li>
                         <li><a href="?#produtos">Produtos</a></li>
                         <li><a href="?#lojas">Lojas</a></li>
-                        <li><a href="index.jsp?p=cadFunc">CadFunc</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="index.jsp?p=cadCliente">Cadastro</a></li>
                         <li><a href="index.jsp?p=login">Login</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="index.jsp?p=cadFunc">CadFunc</a></li>
+                        <li><a href="ServletFuncionario?action=off">Logoff</a></li>
                     </ul>
                 </div>
             </div>
