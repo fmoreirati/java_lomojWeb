@@ -2,7 +2,6 @@ package br.com.lojaWEB.logica;
 
 import br.com.lojaWEB.controller.CtrlCliente;
 import br.com.lojaWEB.model.Cliente;
-import java.sql.SQLException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -73,12 +72,12 @@ public class ClienteLogica implements Logica {
                 cliente.setNumero(req.getParameter("numero").trim());
                 cliente.setComplemento(req.getParameter("complemento").trim());
                 cliente.setPws(req.getParameter("pws1").trim());
-                if (cliente.isCliente(req.getParameter("pws2").trim())) {
-                    CtrlCliente ctrCliente = new CtrlCliente();
-                    ctrCliente.salvar(cliente);
-                    req.setAttribute("avisos", cliente.getNome() + " cadastrado com sucesso.");
-                    cliente = null;
-                }
+                cliente.isCliente(req.getParameter("pws2").trim());
+                CtrlCliente ctrCliente = new CtrlCliente();
+                ctrCliente.salvar(cliente);
+                req.setAttribute("avisos", cliente.getNome() + " cadastrado com sucesso.");
+                cliente = null;
+
             } catch (Exception e) {
                 req.setAttribute("erros", e.getMessage().replace(".\n", ".<br>"));
                 req.setAttribute("cliente", cliente);
