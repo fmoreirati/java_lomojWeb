@@ -3,17 +3,18 @@
     <c:import url="msg.jsp"/>
     <h3 class="col-md-12">Identificação</h3>
     <div class="container col-md-6">
-        <form action="ServletCliente" method="POST" class="form">
+        <form action="sys" method="POST" class="form">
+            <input type="hidden" name="logica" value="ClienteLogica">
             <input type="hidden" name="action" value="log">
             <legend>Já tenho cadastro</legend>
             <div class="form-group">
                 <label for="email">E-mail</label>
-                <input type="email" name="email" class="form-control"  value="${cliente.email}">
+                <input type="email" name="email" class="form-control">
             </div>
 
             <div class="form-group">
-                <label for="pws">Senha</label>
-                <input type="password" name="pws" class="form-control">
+                <label for="pws1">Senha</label>
+                <input type="password" name="pws1" class="form-control">
                 <p class="text-right"><a href="index.jsp?p=esqueci">Esqueci minha senha!</a></p>
             </div>
 

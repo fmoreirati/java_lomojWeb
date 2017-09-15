@@ -59,12 +59,12 @@
             --%>
             <div class="form-group">
                 <label for="numero">Numero</label>
-                <input type="text" name="numero" class="form-control">
-            </div>
+                <input type="text" name="numero" class="form-control" value="${cliente.numero}">
+                 </div>
 
             <div class="form-group">
                 <label for="complemento">Complemento</label>
-                <input type="text" name="complemento" class="form-control">
+                <input type="text" name="complemento" class="form-control" value="${cliente.complemento}">
             </div>
 
             <div class="form-group">

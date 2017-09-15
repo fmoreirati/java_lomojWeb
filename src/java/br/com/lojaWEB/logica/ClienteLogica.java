@@ -2,6 +2,7 @@ package br.com.lojaWEB.logica;
 
 import br.com.lojaWEB.controller.CtrlCliente;
 import br.com.lojaWEB.model.Cliente;
+import java.sql.SQLException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -22,29 +23,24 @@ public class ClienteLogica implements Logica {
         if (req.getParameter("action").equals("log")) {
             try {
                 CtrlCliente ctrlCliente = new CtrlCliente();
-                Cliente cliente = ctrlCliente.login(req.getParameter("email"), req.getParameter("pws"));
-
-                if (cliente != null) {
-                    req.setAttribute("avisos", "Logado com sucesso.");
-                    //Chama a session
-                    HttpSession user = req.getSession();
-                    //Cria uma variavel de session
-                    user.setAttribute("id", cliente.getId());
-                    user.setAttribute("nome", cliente.getNome());
-
-                } else {
-
-                    req.setAttribute("erros", "Cliente não encontrado.");
-                    //Chama a session
-                    HttpSession user = req.getSession();
-                    //apaga a variavel de session
-                    user.removeAttribute("nome");
-                }
-
+                Cliente cliente = ctrlCliente.login(req.getParameter("email"), req.getParameter("pws1"));
+                req.setAttribute("avisos", "Logado com sucesso.");
+                //Chama a session
+                HttpSession user = req.getSession();
+                //Cria uma variavel de session
+                user.setAttribute("id", cliente.getId());
+                user.setAttribute("nome", cliente.getNome());
+            } catch (SQLException esql) {
+                req.setAttribute("alertas", esql.getMessage());
             } catch (Exception e) {
-                req.setAttribute("Erros: ", e.getMessage().replace(".\n", ".<br>"));
+                req.setAttribute("erros", "<strong>Cliente não encontrado.</strong><br>" + e.getMessage());
+                pagina = "index.jsp?p=login";
+                //Chama a session
+                HttpSession user = req.getSession();
+                //apaga a variavel de session
+                user.removeAttribute("id");
+                user.removeAttribute("nome");
             }
-
         }//</editor-fold>
 
         //Ação para logoff
