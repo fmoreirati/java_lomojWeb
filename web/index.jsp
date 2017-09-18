@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>LojaWEB ${nome}</title>
+        <title>LojaWEB</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="css/bootstrap.min.css"/>
@@ -27,7 +27,7 @@
                         <li><a href="?#produtos">Produtos</a></li>
                         <li><a href="?#lojas">Lojas</a></li>
                     </ul>
-                    <c:if test="${empty id}">
+                    <c:if test="${empty sessionScope.id}">
                         <ul class="nav navbar-nav navbar-right">
                             <li><a href="index.jsp?p=cadCliente">Cadastro</a></li>
                             <li><a href="index.jsp?p=login">Login</a></li>
@@ -35,6 +35,7 @@
                     </c:if>
                     <c:if test="${not empty id}">
                         <ul class="nav navbar-nav navbar-right">
+                            <li><a href="index.jsp?p=relCliente">Rel.Cliente</a></li>
                             <li><a href="#">${nome}</a></li>
                             <li><a href="sys?logica=ClienteLogica&action=off">Logoff</a></li>
                         </ul>
@@ -49,6 +50,9 @@
             <c:choose>
                 <c:when test="${param.p == 'cadCliente'}">
                     <c:set var="pagina" value="formCliente.jsp"/>
+                </c:when>
+                <c:when test="${param.p == 'relCliente'}">
+                    <c:set var="pagina" value="reportCliente.jsp"/>
                 </c:when>
                 <c:when test="${param.p == 'cadFunc'}">
                     <c:set var="pagina" value="formFuncionario.jsp"/>

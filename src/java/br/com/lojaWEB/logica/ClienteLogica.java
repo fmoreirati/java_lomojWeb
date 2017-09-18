@@ -81,6 +81,19 @@ public class ClienteLogica implements Logica {
             pagina = "index.jsp?p=cadCliente";
         }//</editor-fold>
 
+        //Ação para listar
+        //<editor-fold>
+        if (req.getParameter("action").equals("list")) {
+            try {
+                CtrlCliente ctrlCliente = new CtrlCliente();
+                req.setAttribute("clientes", ctrlCliente.listar(req.getParameter("busca")));
+
+            } catch (Exception e) {
+                req.setAttribute("erros", e.getMessage().replace(".\n", ".<br>"));
+            }
+            pagina = "index.jsp?p=relCliente";
+        }//</editor-fold>
+
         /*
         //Ação para apagar
         //<editor-fold>
@@ -92,19 +105,6 @@ public class ClienteLogica implements Logica {
             } catch (Exception e) {
                 req.setAttribute("erros", e.getMessage().replace(".\n", ".<br>"));
                 req.setAttribute("cliente", cliente);
-            }
-            pagina = "index.jsp?p=reportCliente";
-        }//</editor-fold>
-
-        //Ação para listar
-        //<editor-fold>
-        if (req.getParameter("action").equals("list")) {
-            try {
-                CtrlCliente ctrCliente = new CtrlCliente();
-                req.setAttribute("clientes", ctrCliente.listar(req.getParameter("busca")));
-
-            } catch (Exception e) {
-                req.setAttribute("erros", e.getMessage().replace(".\n", ".<br>"));
             }
             pagina = "index.jsp?p=reportCliente";
         }//</editor-fold>
