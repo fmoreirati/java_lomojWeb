@@ -33,6 +33,12 @@
                             <li><a href="index.jsp?p=login">Login</a></li>
                         </ul>
                     </c:if>
+                    <c:if test="${empty sessionScope.adm}">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a href="index.jsp?p=cadProduto">Cad.Produto</a></li>
+                            <li><a href="index.jsp?p=relProduto">Rel.Produto</a></li>
+                        </ul>
+                    </c:if>
                     <c:if test="${not empty id}">
                         <ul class="nav navbar-nav navbar-right">
                             <li><a href="index.jsp?p=relCliente">Rel.Cliente</a></li>
@@ -54,9 +60,14 @@
                 <c:when test="${param.p == 'relCliente'}">
                     <c:set var="pagina" value="reportCliente.jsp"/>
                 </c:when>
-                <c:when test="${param.p == 'cadFunc'}">
-                    <c:set var="pagina" value="formFuncionario.jsp"/>
+               
+                <c:when test="${param.p == 'relProduto'}">
+                    <c:set var="pagina" value="reportProduto.jsp"/>
                 </c:when>
+                <c:when test="${param.p == 'cadProduto'}">
+                    <c:set var="pagina" value="formProduto.jsp"/>
+                </c:when>
+                
                 <c:when test="${param.p == 'login'}">
                     <c:set var="pagina" value="login.jsp"/>
                 </c:when>

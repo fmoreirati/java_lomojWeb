@@ -19,6 +19,7 @@ public class Cliente implements Serializable {
     private String numero;
     private String complemento;
     private String pws;
+    private String foto;
 
     public Long getId() {
         return id;
@@ -93,6 +94,15 @@ public class Cliente implements Serializable {
         this.complemento = complemento;
     }
 
+    public String getFoto() {
+        return foto;
+    }
+
+    public void setFoto(String foto) {
+        this.foto = foto;
+    }
+
+    //Validação
     private String isDados() {
         String erros = "";
         if (nome.equals("")) {
@@ -143,4 +153,5 @@ public class Cliente implements Serializable {
         }
         return true;
     }
+
 }

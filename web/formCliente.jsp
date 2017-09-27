@@ -2,7 +2,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class="container">
     <c:import url="msg.jsp"/>
-    <form action="sys" method="POST" class="form">
+    <form action="sys" method="POST" class="form" enctype="multipart/form-data">
         <input type="hidden" name="action" value="cad">
         <input type="hidden" name="logica" value="ClienteLogica">
         <div class="container col-md-6">
@@ -11,6 +11,10 @@
             <div class="form-group">
                 <label for="nome">Nome</label>
                 <input type="text" name="nome" class="form-control" value="${cliente.nome}">
+            </div>
+            <div class="form-group">
+                <label for="foto1">Foto</label>
+                <input type="file" name="foto1" class="form-control" value="">
             </div>
 
             <div class="form-group">

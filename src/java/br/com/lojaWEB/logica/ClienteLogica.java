@@ -3,10 +3,13 @@ package br.com.lojaWEB.logica;
 import br.com.lojaWEB.controller.CtrlCliente;
 import br.com.lojaWEB.model.Cliente;
 import java.sql.SQLException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import util.UpFiles;
 
+@MultipartConfig
 public class ClienteLogica implements Logica {
 
     private static final long serialVersionUID = 1L;
@@ -63,16 +66,24 @@ public class ClienteLogica implements Logica {
         if (req.getParameter("action").equals("cad")) {
             Cliente cliente = new Cliente();
             try {
-                cliente.setNome(req.getParameter("nome").trim());
-                cliente.setEmail(req.getParameter("email").trim());
-                cliente.setNumero(req.getParameter("numero").trim());
-                cliente.setComplemento(req.getParameter("complemento").trim());
-                cliente.setPws(req.getParameter("pws1").trim());
-                cliente.isCliente(req.getParameter("pws2").trim());
-                CtrlCliente ctrCliente = new CtrlCliente();
-                ctrCliente.salvar(cliente);
-                req.setAttribute("avisos", cliente.getNome() + " cadastrado com sucesso.");
-                cliente = null;
+                UpFiles up = new UpFiles();
+                up.setPath("");
+                if (up.send(req)) {
+                    String fotos[] = up.getFiles();
+                    cliente.setFoto(req.getPart("foto1").getSubmittedFileName());
+
+                    cliente.setNome(req.getParameter("nome").trim());
+                    cliente.setEmail(req.getParameter("email").trim());
+                    cliente.setNumero(req.getParameter("numero").trim());
+                    cliente.setComplemento(req.getParameter("complemento").trim());
+                    cliente.setPws(req.getParameter("pws1").trim());
+                    cliente.isCliente(req.getParameter("pws2").trim());
+
+                    CtrlCliente ctrCliente = new CtrlCliente();
+                    ctrCliente.salvar(cliente);
+                    req.setAttribute("avisos", cliente.getNome() + " cadastrado com sucesso.");
+                    cliente = null;
+                }
 
             } catch (Exception e) {
                 req.setAttribute("erros", e.getMessage().replace(".\n", ".<br>"));
