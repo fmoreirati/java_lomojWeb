@@ -15,6 +15,8 @@ public class ProdutoLogica implements Logica {
     public String executa(HttpServletRequest req, HttpServletResponse res)
             throws Exception {
         res.setContentType("text/html;charset=UTF-8");
+        req.setCharacterEncoding("UTF-8");
+        
         //Retorno da Pagina
         String pagina = "index.jsp";
 
@@ -39,6 +41,13 @@ public class ProdutoLogica implements Logica {
                     produto.setValor(Double.parseDouble(req.getParameter("valor")));
                 }
 
+                //Trata o valor do botão de rádio
+                if (req.getParameter("ativo").equals("1")) {
+                    produto.setAtivo(true);
+                } else {
+                    produto.setAtivo(false);
+                }
+
                 produto.isProduto();
 
                 CtrlProduto ctrProduto = new CtrlProduto();
@@ -59,12 +68,25 @@ public class ProdutoLogica implements Logica {
         if (req.getParameter("action").equals("list")) {
             try {
                 CtrlProduto ctrlProduto = new CtrlProduto();
-                req.setAttribute("produtos", ctrlProduto.listar(req.getParameter("busca")));
+                req.setAttribute("produtos", ctrlProduto.listarTodos(req.getParameter("busca")));
 
             } catch (Exception e) {
                 req.setAttribute("erros", e.getMessage().replace(".\n", ".<br>"));
             }
             pagina = "index.jsp?p=relProduto";
+        }//</editor-fold>
+        
+        //Ação para Descrição
+        //<editor-fold>
+        if (req.getParameter("action").equals("desc")) {
+            try {
+                CtrlProduto ctrlProduto = new CtrlProduto();
+                req.setAttribute("produto", ctrlProduto.buscarID(Long.parseLong(req.getParameter("id"))));
+
+            } catch (Exception e) {
+                req.setAttribute("erros", e.getMessage().replace(".\n", ".<br>"));
+            }
+            pagina = "index.jsp?p=descProduto";
         }//</editor-fold>
 
         //Ação para Editar
@@ -83,7 +105,6 @@ public class ProdutoLogica implements Logica {
             pagina = "index.jsp?p=cadProduto";
         }//</editor-fold>
 
-        
         //Ação para Alterar
         //<editor-fold>
         if (req.getParameter("action").equals("alt")) {
@@ -102,11 +123,18 @@ public class ProdutoLogica implements Logica {
                 if (!req.getParameter("valor").equals("")) {
                     produto.setValor(Double.parseDouble(req.getParameter("valor")));
                 }
-                
+
+                //Trata o valor do botão de rádio
+                if (req.getParameter("ativo").equals("1")) {
+                    produto.setAtivo(true);
+                } else {
+                    produto.setAtivo(false);
+                }
+
                 produto.isProduto();
                 CtrlProduto ctrlProduto = new CtrlProduto();
                 ctrlProduto.alterar(produto);
-                 req.setAttribute("avisos", "Produto alterado com sucesso.");
+                req.setAttribute("avisos", "Produto alterado com sucesso.");
                 produto = null;
 
             } catch (Exception e) {
@@ -115,10 +143,10 @@ public class ProdutoLogica implements Logica {
 
             }
             req.setAttribute("produto", produto);
-            pagina = "index.jsp?p=formProduto";
+            pagina = "index.jsp?p=cadProduto";
         }//</editor-fold>
 
-        /*
+        
         //Ação para apagar
         //<editor-fold>
         if (req.getParameter("action").equals("remove")) {
@@ -133,10 +161,7 @@ public class ProdutoLogica implements Logica {
             pagina = "index.jsp?p=reportProduto";
         }//</editor-fold>
 
-       
-        
-         */
-        //Retorna para a pagina
+       //Retorna para a pagina
         return pagina;
     }
 

@@ -3,10 +3,12 @@ package br.com.lojaWEB.logica;
 import br.com.lojaWEB.controller.CtrlCliente;
 import br.com.lojaWEB.model.Cliente;
 import java.sql.SQLException;
+import java.util.Calendar;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import static util.Dates.strToDate;
 import util.UpFiles;
 
 @MultipartConfig
@@ -18,6 +20,8 @@ public class ClienteLogica implements Logica {
     public String executa(HttpServletRequest req, HttpServletResponse res)
             throws Exception {
         res.setContentType("text/html;charset=UTF-8");
+        req.setCharacterEncoding("UTF-8");
+        
         //Retorno da Pagina
         String pagina = "index.jsp";
 
@@ -71,21 +75,36 @@ public class ClienteLogica implements Logica {
                 if (up.send(req)) {
                     String fotos[] = up.getFiles();
                     cliente.setFoto(req.getPart("foto1").getSubmittedFileName());
-
+                    //Cliente
                     cliente.setNome(req.getParameter("nome").trim());
                     cliente.setEmail(req.getParameter("email").trim());
                     cliente.setNumero(req.getParameter("numero").trim());
                     cliente.setComplemento(req.getParameter("complemento").trim());
-                    cliente.setPws(req.getParameter("pws1").trim());
-                    cliente.isCliente(req.getParameter("pws2").trim());
 
+                    //Converte String em Calendar
+                    Calendar dtc = Calendar.getInstance();
+                    dtc.setTime(strToDate(req.getParameter("dataNasc").trim()));
+                    cliente.setDataNasc(dtc);
+                   
+                    cliente.setPws(req.getParameter("pws1").trim());
+                    //Endereco
+                    cliente.getEndereco().setCep(req.getParameter("cep").trim());
+                    cliente.getEndereco().setLogradouro(req.getParameter("logradouro").trim());
+                    cliente.getEndereco().setBairro(req.getParameter("bairro").trim());
+                    cliente.getEndereco().setCidade(req.getParameter("cidade").trim());
+                    cliente.getEndereco().setUf(req.getParameter("uf").trim());
+                    //Validação
+                    cliente.isCliente(req.getParameter("pws2").trim());
+                    //Controle e Salvar
                     CtrlCliente ctrCliente = new CtrlCliente();
                     ctrCliente.salvar(cliente);
+                    //Retorno Positivo
                     req.setAttribute("avisos", cliente.getNome() + " cadastrado com sucesso.");
                     cliente = null;
                 }
 
             } catch (Exception e) {
+                //Retorno Negativo
                 req.setAttribute("erros", e.getMessage().replace(".\n", ".<br>"));
                 req.setAttribute("cliente", cliente);
             }
@@ -105,7 +124,6 @@ public class ClienteLogica implements Logica {
             pagina = "index.jsp?p=relCliente";
         }//</editor-fold>
 
-        /*
         //Ação para apagar
         //<editor-fold>
         if (req.getParameter("action").equals("remove")) {
@@ -135,8 +153,7 @@ public class ClienteLogica implements Logica {
             req.setAttribute("cliente", cliente);
             pagina = "index.jsp?p=formCliente";
         }//</editor-fold>
-        
-        
+
         //Ação para Alterar
         //<editor-fold>
         if (req.getParameter("action").equals("alt")) {
@@ -160,7 +177,7 @@ public class ClienteLogica implements Logica {
             req.setAttribute("cliente", cliente);
             pagina = "index.jsp?p=formCliente";
         }//</editor-fold>
-         */
+
         //Retorna para a pagina
         return pagina;
     }

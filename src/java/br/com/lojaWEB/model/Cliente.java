@@ -1,10 +1,14 @@
 package br.com.lojaWEB.model;
 
 import java.io.Serializable;
+import java.util.Calendar;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
 
 @Entity
 public class Cliente implements Serializable {
@@ -20,6 +24,12 @@ public class Cliente implements Serializable {
     private String complemento;
     private String pws;
     private String foto;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    private Endereco endereco = new Endereco();
+
+    @Temporal(javax.persistence.TemporalType.DATE)
+    private Calendar dataNasc;
 
     public Long getId() {
         return id;
@@ -102,6 +112,22 @@ public class Cliente implements Serializable {
         this.foto = foto;
     }
 
+    public Endereco getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
+    }
+
+    public Calendar getDataNasc() {
+        return dataNasc;
+    }
+
+    public void setDataNasc(Calendar dataNasc) {
+        this.dataNasc = dataNasc;
+    }
+
     //Validação
     private String isDados() {
         String erros = "";
@@ -111,6 +137,11 @@ public class Cliente implements Serializable {
         if (email.equals("")) {
             erros += "E-mail em branco.\n";
         }
+
+        if (!dataNasc.isWeekDateSupported()) {
+            erros += "Data Nasc. em branco.\n";
+        }
+
         if (numero.equals("")) {
             erros += "Numero em branco.\n";
         }
@@ -131,7 +162,7 @@ public class Cliente implements Serializable {
     }
 
     public boolean isCliente(String pws) throws Exception {
-        String erros = isDados() + isSenha(pws);
+        String erros = isDados() + isSenha(pws) + endereco.isDados();
         if (!erros.equals("")) {
             throw new Exception(erros);
         }
@@ -139,7 +170,7 @@ public class Cliente implements Serializable {
     }
 
     public boolean isCliente() throws Exception {
-        String erros = isDados();
+        String erros = isDados() + endereco.isDados();
         if (!erros.equals("")) {
             throw new Exception(erros);
         }
@@ -153,5 +184,4 @@ public class Cliente implements Serializable {
         }
         return true;
     }
-
 }

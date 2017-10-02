@@ -7,6 +7,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="css/bootstrap.min.css"/>
         <link rel="stylesheet" href="css/bootstrap-theme.min.css"/>
+        <link rel="stylesheet" href="css/jquery-ui.theme.min.css"/>
+        <link rel="stylesheet" href="css/jquery-ui.structure.min.css"/>
         <link rel="stylesheet" href="css/estilo.css"/>
     </head>
     <body class="container">
@@ -60,14 +62,17 @@
                 <c:when test="${param.p == 'relCliente'}">
                     <c:set var="pagina" value="reportCliente.jsp"/>
                 </c:when>
-               
+
                 <c:when test="${param.p == 'relProduto'}">
                     <c:set var="pagina" value="reportProduto.jsp"/>
                 </c:when>
                 <c:when test="${param.p == 'cadProduto'}">
                     <c:set var="pagina" value="formProduto.jsp"/>
                 </c:when>
-                
+                <c:when test="${param.p == 'descProduto'}">
+                    <c:set var="pagina" value="descProduto.jsp"/>
+                </c:when>
+
                 <c:when test="${param.p == 'login'}">
                     <c:set var="pagina" value="login.jsp"/>
                 </c:when>
@@ -82,8 +87,11 @@
             <h5> Feito por Fabiano Moreira</h5>
         </footer>
         <!-- Scripts-->
-        <script src="js/jquery-3.2.1.slim.min.js"></script>
+        <script src="js/jquery-1.12.3.min.js"></script>
+        <script src="js/jquery-ui.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
+        <script src="js/scripts.js"></script>
+
 
     </body>
 </html>

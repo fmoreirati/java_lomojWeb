@@ -30,6 +30,11 @@
     <c:forEach var="cliente" items="${clientes}">
         <tr> 
             <td>${cliente.id}</td>
+             <td class="col-md-2">
+                <c:if test="${not empty cliente.foto}">
+                    <img src="img/user/${cliente.foto}" class="img-responsive">
+                </c:if>
+            </td>
             <td>${cliente.nome}</td>
             <td>${cliente.email}</td>
             <td class="col-md-1 right"><a href="sys?logica=ClienteLogica&action=edit&id=${cliente.id}"><span class="glyphicon glyphicon-pencil"></span></td>

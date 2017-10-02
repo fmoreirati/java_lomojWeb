@@ -24,9 +24,9 @@
             <th>Descricao</th>
             <th>Quant.</th>
             <th>Valor</th>
-            <th>Foto 1</th>
-            <th>Foto 2</th>
-            <th>Foto 3</th>
+            <th class="col-md-2">Foto 1</th>
+            <th class="col-md-2">Foto 2</th>
+            <th class="col-md-2">Foto 3</th>
             <th>Ativo</th>
             <th class="col-md-1 right"><span class="glyphicon glyphicon-pencil"></span></th>
             <th class="col-md-1 right"><span class="glyphicon glyphicon-remove"></span></th>
@@ -38,12 +38,29 @@
             <td>${produto.descricao}</td>
             <td>${produto.quant}</td>
             <td>${produto.valor}</td>
-            <td>${produto.foto1}</td>
-            <td>${produto.foto2}</td>
-            <td>${produto.foto3}</td>
-            <td>${produto.quant}</td>
+            <td class="col-md-2">
+                <c:if test="${not empty produto.foto1}">
+                    <img src="img/produto/${produto.foto1}" class="img-responsive">
+                </c:if>
+            </td>
+            <td class="col-md-2">
+                <c:if test="${not empty produto.foto2}">
+                    <img src="img/produto/${produto.foto2}" class="img-responsive">
+                </c:if>
+            </td>
+            <td class="col-md-2">
+                <c:if test="${not empty produto.foto3}">
+                    <img src="img/produto/${produto.foto3}" class="img-responsive">
+                </c:if>
+            </td>
+
+            <td>
+                <c:if test="${produto.ativo}">Ativo</c:if>
+                <c:if test="${not produto.ativo}">Bloquado</c:if>    
+            </td>
+
             <td class="col-md-1 right"><a href="sys?logica=ProdutoLogica&action=edit&id=${produto.id}"><span class="glyphicon glyphicon-pencil"></span></td>
-            <td class="col-md-1 rightk"><a href="sys?logica=ProdutoLogica&action=remove&id=${produto.id}" onclick="if(confirm('apagar?'))"><span class="glyphicon glyphicon-remove"></span></td>
+            <td class="col-md-1 rightk"><a href="sys?logica=ProdutoLogica&action=remove&id=${produto.id}" onclick="if (confirm('apagar?'))"><span class="glyphicon glyphicon-remove"></span></td>
         </tr>
     </c:forEach>
 </table>

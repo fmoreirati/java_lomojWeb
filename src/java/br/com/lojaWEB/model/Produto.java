@@ -1,10 +1,12 @@
 package br.com.lojaWEB.model;
 
 import java.io.Serializable;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.ws.rs.DefaultValue;
 
 @Entity
 public class Produto implements Serializable {
@@ -28,6 +30,10 @@ public class Produto implements Serializable {
     private String foto1;
     private String foto2;
     private String foto3;
+    
+    //Dados padrões
+    @Column(nullable = true)
+    private boolean ativo;
 
     public String getDescricao() {
         return descricao;
@@ -77,6 +83,15 @@ public class Produto implements Serializable {
         this.foto3 = foto3;
     }
 
+     public boolean isAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(boolean ativo) {
+        this.ativo = ativo;
+    }
+    
+    //Validação
     public void isProduto() throws Exception {
         String erros = "";
         if (descricao.equals("")) {
@@ -95,6 +110,7 @@ public class Produto implements Serializable {
             throw new Exception(erros);
         }
     }
+    
 
     @Override
     public int hashCode() {

@@ -104,6 +104,16 @@ public class ProdutoDAO {
     //Buscar todos por nomes
     public List<Produto> findProdutos(String dados) {
         try {
+            Query query = em.createQuery("select p from Produto as p where p.descricao like :dados and p.ativo = 1");
+            query.setParameter("dados", dados + "%");
+            List<Produto> produtos = query.getResultList();
+            return produtos;
+        } finally {
+            em.close();
+        }
+    }
+    public List<Produto> findProdutosALL(String dados) {
+        try {
             Query query = em.createQuery("select p from Produto as p where p.descricao like :dados");
             query.setParameter("dados", dados + "%");
             List<Produto> produtos = query.getResultList();
