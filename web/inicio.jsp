@@ -6,16 +6,18 @@
 
     <div class="row">
     <c:forEach items="${dao.listar('')}" var="p">
-        <div class="col-md-3 produto well">
+        <div class="col-md-3"> 
             <a href="sys?logica=ProdutoLogica&action=desc&id=${p.id}">
-                <img src="img/produto/${p.foto1}" title="" alt="" class="img-responsive">
-                <p class="descricao">${p.descricao}</p>
-                <p class="valor">
-                    R$
-                    <f:formatNumber minFractionDigits="2" currencySymbol="R$">
-                        ${p.valor}
-                    </f:formatNumber>
-            </a>
-        </div>    
+                <div class="produto well">
+                    <img src="img/produto/${p.foto1}" title="" alt="" class="img-responsive">
+                    <p class="descricao">${p.descricao}</p>
+                    <p class="valor">
+                        R$
+                        <f:formatNumber minFractionDigits="2" currencySymbol="R$">
+                            ${p.valor}
+                        </f:formatNumber>
+                </div>
+            </a>    
+        </div>
     </c:forEach>
 </div>

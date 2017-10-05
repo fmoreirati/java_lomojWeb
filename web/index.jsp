@@ -28,26 +28,22 @@
                         <li><a href="index.jsp">Inicio</a></li>
                         <li><a href="?#produtos">Produtos</a></li>
                         <li><a href="?#lojas">Lojas</a></li>
-                    </ul>
-                    <c:if test="${empty sessionScope.id}">
-                        <ul class="nav navbar-nav navbar-right">
-                            <li><a href="index.jsp?p=cadCliente">Cadastro</a></li>
-                            <li><a href="index.jsp?p=login">Login</a></li>
-                        </ul>
-                    </c:if>
-                    <c:if test="${empty sessionScope.adm}">
-                        <ul class="nav navbar-nav navbar-right">
+                    </ul> 
+                    <ul class="nav navbar-nav navbar-right">
+                        <c:if test="${empty sessionScope.adm}">
                             <li><a href="index.jsp?p=cadProduto">Cad.Produto</a></li>
                             <li><a href="index.jsp?p=relProduto">Rel.Produto</a></li>
-                        </ul>
-                    </c:if>
-                    <c:if test="${not empty id}">
-                        <ul class="nav navbar-nav navbar-right">
                             <li><a href="index.jsp?p=relCliente">Rel.Cliente</a></li>
+                        </c:if>
+                        <c:if test="${empty sessionScope.id}">
+                            <li><a href="index.jsp?p=cadCliente">Cadastro</a></li>
+                            <li><a href="index.jsp?p=login">Login</a></li
+                         </c:if>
+                        <c:if test="${not empty id}">
                             <li><a href="#">${nome}</a></li>
                             <li><a href="sys?logica=ClienteLogica&action=off">Logoff</a></li>
-                        </ul>
-                    </c:if>
+                         </c:if>
+                    </ul>
                 </div>
             </div>
         </nav>
@@ -62,13 +58,14 @@
                 <c:when test="${param.p == 'relCliente'}">
                     <c:set var="pagina" value="reportCliente.jsp"/>
                 </c:when>
-
-                <c:when test="${param.p == 'relProduto'}">
-                    <c:set var="pagina" value="reportProduto.jsp"/>
-                </c:when>
+                
                 <c:when test="${param.p == 'cadProduto'}">
                     <c:set var="pagina" value="formProduto.jsp"/>
                 </c:when>
+                <c:when test="${param.p == 'relProduto'}">
+                    <c:set var="pagina" value="reportProduto.jsp"/>
+                </c:when>
+                                
                 <c:when test="${param.p == 'descProduto'}">
                     <c:set var="pagina" value="descProduto.jsp"/>
                 </c:when>
