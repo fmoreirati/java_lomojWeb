@@ -40,17 +40,17 @@
             <td>${produto.valor}</td>
             <td class="col-md-2">
                 <c:if test="${not empty produto.foto1}">
-                    <img src="img/produto/${produto.foto1}" class="img-responsive">
+                    <img src="img/produto/${produto.foto1}" class="img-responsive produtopq">
                 </c:if>
             </td>
             <td class="col-md-2">
                 <c:if test="${not empty produto.foto2}">
-                    <img src="img/produto/${produto.foto2}" class="img-responsive">
+                    <img src="img/produto/${produto.foto2}" class="img-responsive produtopq">
                 </c:if>
             </td>
             <td class="col-md-2">
                 <c:if test="${not empty produto.foto3}">
-                    <img src="img/produto/${produto.foto3}" class="img-responsive">
+                    <img src="img/produto/${produto.foto3}" class="img-responsive produtopq">
                 </c:if>
             </td>
 

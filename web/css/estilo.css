@@ -3,3 +3,32 @@ body{
 }
 .redValor{color: #f00; font-size: 3.5em;}
 
+.produto{
+    padding: 5px;
+    color:#222;
+}
+.produto a{
+    text-decoration: none;
+}
+
+.produto img{
+    width: 100%;
+    max-width: 320px;
+}
+
+.produto .descricao{
+    padding: 10px;
+    font-size: 1.25em;
+    font-weight: 600;
+}
+
+.produto .valor{
+    font-size: 1.65em;
+    font-weight: 800;
+    color: #f00;
+}
+
+.produtopq{
+    width: 100%;
+    max-width: 80px;
+}

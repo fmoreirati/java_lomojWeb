@@ -32,17 +32,17 @@
 
             <div class="form-group">
                 <label for="foto1">Foto 1</label>
-                <input type="file" name="foto1" class="form-control" value="">
+                <input type="file" name="foto1" class="form-control" value="${produto.foto1}">
             </div>
 
             <div class="form-group">
                 <label for="foto2">Foto 2</label>
-                <input type="file" name="foto2" class="form-control" value="${produto.foto1}">
+                <input type="file" name="foto2" class="form-control" value="${produto.foto2}">
             </div>
 
             <div class="form-group">
                 <label for="foto3">Foto 3</label>
-                <input type="file" name="foto3" class="form-control" value="">
+                <input type="file" name="foto3" class="form-control" value="${produto.foto3}">
             </div>
 
             <fieldset class="form-group">

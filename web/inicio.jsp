@@ -6,10 +6,10 @@
 
     <div class="row">
     <c:forEach items="${dao.listar('')}" var="p">
-        <div class="col-md-3"> 
+        <div class="col-md-3 produto"> 
             <a href="sys?logica=ProdutoLogica&action=desc&id=${p.id}">
-                <div class="produto well">
-                    <img src="img/produto/${p.foto1}" title="" alt="" class="img-responsive">
+                <div class="well">
+                    <img src="img/produto/${p.foto1}" title="${p.foto1}" alt="${p.descricao}" class="img-responsive">
                     <p class="descricao">${p.descricao}</p>
                     <p class="valor">
                         R$
