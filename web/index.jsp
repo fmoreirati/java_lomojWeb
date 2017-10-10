@@ -38,11 +38,12 @@
                         <c:if test="${empty sessionScope.id}">
                             <li><a href="index.jsp?p=cadCliente">Cadastro</a></li>
                             <li><a href="index.jsp?p=login">Login</a></li
-                         </c:if>
+                        </c:if>
                         <c:if test="${not empty id}">
                             <li><a href="#">${nome}</a></li>
                             <li><a href="sys?logica=ClienteLogica&action=off">Logoff</a></li>
-                         </c:if>
+                        </c:if>
+                        <li><a href="index.jsp?p=carrinho">Carrinho ${sessionScope.tamanho}</a></li>
                     </ul>
                 </div>
             </div>
@@ -58,16 +59,20 @@
                 <c:when test="${param.p == 'relCliente'}">
                     <c:set var="pagina" value="reportCliente.jsp"/>
                 </c:when>
-                
+
                 <c:when test="${param.p == 'cadProduto'}">
                     <c:set var="pagina" value="formProduto.jsp"/>
                 </c:when>
                 <c:when test="${param.p == 'relProduto'}">
                     <c:set var="pagina" value="reportProduto.jsp"/>
                 </c:when>
-                                
+
                 <c:when test="${param.p == 'descProduto'}">
                     <c:set var="pagina" value="descProduto.jsp"/>
+                </c:when>
+
+                <c:when test="${param.p == 'carrinho'}">
+                    <c:set var="pagina" value="carrinho.jsp"/>
                 </c:when>
 
                 <c:when test="${param.p == 'login'}">
