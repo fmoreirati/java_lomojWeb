@@ -37,7 +37,7 @@
                         </c:if>
                         <c:if test="${empty sessionScope.id}">
                             <li><a href="index.jsp?p=cadCliente">Cadastro</a></li>
-                            <li><a href="index.jsp?p=login">Login</a></li
+                            <li><a href="index.jsp?p=login">Login</a></li>
                         </c:if>
                         <c:if test="${not empty id}">
                             <li><a href="#">${nome}</a></li>
