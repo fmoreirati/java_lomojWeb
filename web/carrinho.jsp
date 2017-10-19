@@ -27,7 +27,7 @@
                 <th class="col-md-1 right"><span class="glyphicon glyphicon-remove"></span></th>
             </tr>
 
-        <c:forEach items="${lista}" var="i"> 
+        <c:forEach items="${itens}" var="i"> 
             <input type="hidden" value="${i.produto.id}" name="id"> 
             <tr>
                 <td class="col-md-6"> 
