@@ -35,8 +35,7 @@ public class Carrinho implements Logica {
             item.setProduto(produto);
             Pedido pedido = new Pedido();
             item.setPedido(pedido);
-            
-            List<Item> itens = (List<Item>)carrinho.getAttribute("itens");
+            List<Item> itens = (List<Item>) carrinho.getAttribute("itens");
             carrinho.setAttribute("itens", adicionarProduto(itens, item));
             pagina = "index.jsp?p=carrinho";
         }//</editor-fold>
@@ -45,6 +44,7 @@ public class Carrinho implements Logica {
         return pagina;
     }
 
+    //Função para criar e incrementar produtos na lista
     public List<Item> adicionarProduto(List itens, Item i) {
         if (itens == null) {
             itens = new ArrayList();
