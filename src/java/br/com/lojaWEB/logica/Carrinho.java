@@ -9,6 +9,7 @@ import java.util.List;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 @MultipartConfig
 public class Carrinho implements Logica {
@@ -20,11 +21,11 @@ public class Carrinho implements Logica {
             throws Exception {
         res.setContentType("text/html;charset=UTF-8");
         req.setCharacterEncoding("UTF-8");
-        
+
         //Retorno da Pagina
         String pagina = "index.jsp";
-        List<Item> itens = new ArrayList<>();
-        
+        HttpSession carrinho = req.getSession(false);
+
         //Ação para Adicionar Produto 
         //<editor-fold>
         if (req.getParameter("action").equals("add")) {
@@ -34,8 +35,9 @@ public class Carrinho implements Logica {
             item.setProduto(produto);
             Pedido pedido = new Pedido();
             item.setPedido(pedido);
-            itens.add(item);
-            req.setAttribute("itens", itens);
+            
+            List<Item> itens = (List<Item>)carrinho.getAttribute("itens");
+            carrinho.setAttribute("itens", adicionarProduto(itens, item));
             pagina = "index.jsp?p=carrinho";
         }//</editor-fold>
 
@@ -43,4 +45,11 @@ public class Carrinho implements Logica {
         return pagina;
     }
 
+    public List<Item> adicionarProduto(List itens, Item i) {
+        if (itens == null) {
+            itens = new ArrayList();
+        }
+        itens.add(i);
+        return itens;
+    }
 }
