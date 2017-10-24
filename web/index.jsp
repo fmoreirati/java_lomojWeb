@@ -43,7 +43,7 @@
                             <li><a href="#">${nome}</a></li>
                             <li><a href="sys?logica=ClienteLogica&action=off">Logoff</a></li>
                             </c:if>
-                            <li><a href="index.jsp?p=carrinho">Carrinho<c:if test="${not empty tamanho}"><span class="badge"> ${sessionScope.tamanho} </span></c:if></a></li>
+                            <li><a href="index.jsp?p=carrinho"> Carrinho <c:if test="${not empty tamanho}"><span class="badge"> ${sessionScope.tamanho} </span></c:if></a></li>
                         </ul>
                     </div>
                 </div>

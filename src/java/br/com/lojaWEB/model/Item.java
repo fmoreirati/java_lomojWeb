@@ -57,6 +57,11 @@ public class Item implements Serializable {
     
     @OneToOne
     private Pedido pedido;
+
+    public Item() {
+        this.quant = 1;
+    } 
+    
     
     public int getQuant() {
         return quant;
