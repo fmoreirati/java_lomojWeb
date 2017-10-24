@@ -36,7 +36,11 @@ public class Carrinho implements Logica {
             Pedido pedido = new Pedido();
             item.setPedido(pedido);
             List<Item> itens = (List<Item>) carrinho.getAttribute("itens");
+            if (itens == null) {
+                itens = new ArrayList<>();
+            }
             carrinho.setAttribute("itens", adicionarProduto(itens, item));
+            carrinho.setAttribute("tamanho", itens.size());
             pagina = "index.jsp?p=carrinho";
         }//</editor-fold>
 

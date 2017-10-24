@@ -34,24 +34,24 @@
                             <li><a href="index.jsp?p=cadProduto">Cad.Produto</a></li>
                             <li><a href="index.jsp?p=relProduto">Rel.Produto</a></li>
                             <li><a href="index.jsp?p=relCliente">Rel.Cliente</a></li>
-                        </c:if>
-                        <c:if test="${empty sessionScope.id}">
+                            </c:if>
+                            <c:if test="${empty sessionScope.id}">
                             <li><a href="index.jsp?p=cadCliente">Cadastro</a></li>
                             <li><a href="index.jsp?p=login">Login</a></li>
-                        </c:if>
-                        <c:if test="${not empty id}">
+                            </c:if>
+                            <c:if test="${not empty id}">
                             <li><a href="#">${nome}</a></li>
                             <li><a href="sys?logica=ClienteLogica&action=off">Logoff</a></li>
-                        </c:if>
-                        <li><a href="index.jsp?p=carrinho">Carrinho ${sessionScope.tamanho}</a></li>
-                    </ul>
+                            </c:if>
+                            <li><a href="index.jsp?p=carrinho">Carrinho<c:if test="${not empty tamanho}"><span class="badge"> ${sessionScope.tamanho} </span></c:if></a></li>
+                        </ul>
+                    </div>
                 </div>
-            </div>
-        </nav>
-        <header class="jumbotron">
-            <h2>LojaWEB.</h2><h3> Tudo em um só lugar...</h3>
-        </header>
-        <section class="container row">
+            </nav>
+            <header class="jumbotron">
+                <h2>LojaWEB.</h2><h3> Tudo em um só lugar...</h3>
+            </header>
+            <section class="container row">
             <c:choose>
                 <c:when test="${param.p == 'cadCliente'}">
                     <c:set var="pagina" value="formCliente.jsp"/>
