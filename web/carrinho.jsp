@@ -32,7 +32,7 @@
             <tr>
                 <td class="col-md-6"> 
                     <div class="col-md-2">
-                        <img src="img/${i.produto.foto1}" title="" alt="" class="">
+                        <img src="img/produto/${i.produto.foto1}" title="" alt="" class="">
                     </div>
                     <div class="col-md-10">${i.produto.descricao}</div>
                 </td>
