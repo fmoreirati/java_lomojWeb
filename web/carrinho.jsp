@@ -26,7 +26,8 @@
                 <th class="col-md-2">Valor Total</th>
                 <th class="col-md-1 right"><span class="glyphicon glyphicon-remove"></span></th>
             </tr>
-
+            
+        <c:set var="index" value="-1"></c:set>
         <c:forEach items="${itens}" var="i"> 
             <input type="hidden" value="${i.produto.id}" name="id"> 
             <tr>
@@ -48,7 +49,8 @@
                     <td class="col-md-2">
                         <input type="text" name="valorItem" min="0.00" step="0.01" value='<f:formatNumber minFractionDigits="2" currencySymbol="R$">${i.valorItens}</f:formatNumber>' disabled class="form-control campo valores">
                     </td>
-                    <td class="col-md-1 right"><a href="sys?logica=Carrinho&action=remove&id=${i.produto.id}"<span class="glyphicon glyphicon-remove"></span></td>
+                    
+                    <td class="col-md-1 right"><a href="sys?logica=Carrinho&action=remove&index=${index=index+1}"<span class="glyphicon glyphicon-remove"></span></td>
             </tr>
         </c:forEach>
     </table>      
