@@ -66,6 +66,29 @@ public class Carrinho implements Logica {
             pagina = "index.jsp?p=carrinho";
         }//</editor-fold>
 
+        //Ação para Calcular quantidade e valor dos Produto 
+        //<editor-fold>
+        if (req.getParameter("action").equals("calcular")) {
+            CtrlProduto ctrlProduto = new CtrlProduto();
+
+            String quant[] = req.getParameterValues("quant");
+            
+            //Cria uma lista com itens na sessão "itens"
+            List<Item> itens = (List<Item>) carrinho.getAttribute("itens");
+            int x = 0;
+            for (Item iten : itens) {
+                iten.setQuant(Integer.parseInt(quant[x]));
+                iten.setValorItens();
+                x++;
+            }
+                        
+            //Atualiza sessão com nova lista de itens. Agora atualizada
+            carrinho.setAttribute("itens",itens);
+           
+            //Retorna para o carrinho
+            pagina = "index.jsp?p=carrinho";
+        }//</editor-fold>
+        
         //Ação para Remover Produto 
         //<editor-fold>
         if (req.getParameter("action").equals("remove")) {

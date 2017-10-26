@@ -13,7 +13,7 @@
             </p>
             <p class=" col-md-6 text-right">
                 <button class="btn btn-danger">Realizar Pagamento</button>
-                <input type="hidden" value='<f:formatNumber minFractionDigits="2" currencySymbol="R$">${venda.total}</f:formatNumber>' name="total" class="form-control campo" id="total" disabled> 
+                <input type="hidden" value='<f:formatNumber minFractionDigits="2" currencySymbol="R$">${pedido.total}</f:formatNumber>' name="total" class="form-control campo" id="total" disabled> 
 
             </p>
         </div>
@@ -39,7 +39,7 @@
                 </td>
 
                 <td class="col-md-1">
-                    <input type="number" name="quant" value="${i.quant}" min="1" step="1" class="form-control" onchange="execute(this.form)">
+                    <input type="number" name="quant" value="${i.quant}" min="1" max="${i.produto.quant}" step="1" class="form-control" onchange="execute(this.form)">
                 </td>
 
                 <td class="col-md-2"> 
@@ -77,10 +77,10 @@
     </div>
     <div class="col-md-4 well">
         <strong>
-            <p>Produtos: <f:formatNumber minFractionDigits="2" currencySymbol="R$">${venda.valor}</f:formatNumber></p>
-            <p>Frete(?): <f:formatNumber minFractionDigits="2" currencySymbol="R$">${venda.frete}</f:formatNumber></p>
+            <p>Produtos: <f:formatNumber minFractionDigits="2" currencySymbol="R$">${pedido.valor}</f:formatNumber></p>
+            <p>Frete(?): <f:formatNumber minFractionDigits="2" currencySymbol="R$">${pedido.frete}</f:formatNumber></p>
         </strong>
-        <h3 style="border-top: solid 2px #222;padding: 10px 0">Total:<f:formatNumber minFractionDigits="2" currencySymbol="R$">${venda.total}</f:formatNumber></h3>
+        <h3 style="border-top: solid 2px #222;padding: 10px 0">Total:<f:formatNumber minFractionDigits="2" currencySymbol="R$">${pedido.total}</f:formatNumber></h3>
 
             <p><strong>Possui cupom ou vale? </strong>Você poderá usá-los na etapa de pagamento.</p>
     </div>
@@ -89,7 +89,6 @@
 
 <script>
     // window.onload(execute(this.form));
-
     function execute(frm) {
         frm.action = "sys?logica=Carrinho&action=calcular";
         frm.submit();
