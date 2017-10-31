@@ -46,7 +46,6 @@ public class Carrinho implements Logica {
             //Cria uma lista com itens na sessão "itens"
             List<Item> itens = (List<Item>) carrinho.getAttribute("itens");
             //Se a sessão de "itens" for null. Cria uma nova lista;
-
             if (itens == null) {
                 itens = new ArrayList<>();
             }
@@ -71,8 +70,6 @@ public class Carrinho implements Logica {
         //Ação para Calcular quantidade e valor dos Produto 
         //<editor-fold>
         if (req.getParameter("action").equals("calcular")) {
-            CtrlProduto ctrlProduto = new CtrlProduto();
-
             String quant[] = req.getParameterValues("quant");
 
             //Cria uma lista com itens na sessão "itens"
@@ -94,8 +91,6 @@ public class Carrinho implements Logica {
         //Ação para Remover Produto 
         //<editor-fold>
         if (req.getParameter("action").equals("remove")) {
-            CtrlProduto ctrlProduto = new CtrlProduto();
-
             //Cria uma lista com itens na sessão "itens"
             List<Item> itens = (List<Item>) carrinho.getAttribute("itens");
             //Remove item da lista de Itens
@@ -118,7 +113,7 @@ public class Carrinho implements Logica {
             CtrlPedido ctrlPedido = new CtrlPedido();
             CtrlItem ctrlItem = new CtrlItem();
 
-            if (user == null) {
+            if (user.getAttribute("id") == null) {
                 pagina = "index.jsp?p=login";
             } else {
                 //Busca cliente no banco pelo ID
@@ -136,12 +131,7 @@ public class Carrinho implements Logica {
                     iten.setPedido(pedido);
                     ctrlItem.salvar(iten);
                 }
-
             }
-
-            
-            //Retorna para o carrinho
-            pagina = "index.jsp?p=carrinho";
         }//</editor-fold>
 
         //Retorna para a pagina
