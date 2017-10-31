@@ -1,6 +1,10 @@
 package br.com.lojaWEB.logica;
 
+import br.com.lojaWEB.controller.CtrlCliente;
+import br.com.lojaWEB.controller.CtrlItem;
+import br.com.lojaWEB.controller.CtrlPedido;
 import br.com.lojaWEB.controller.CtrlProduto;
+import br.com.lojaWEB.model.Cliente;
 import br.com.lojaWEB.model.Item;
 import br.com.lojaWEB.model.Pedido;
 import br.com.lojaWEB.model.Produto;
@@ -25,6 +29,7 @@ public class Carrinho implements Logica {
         //Retorno da Pagina
         String pagina = "index.jsp";
         HttpSession carrinho = req.getSession(false);
+        HttpSession user = req.getSession(false);
 
         //Ação para Adicionar Produto 
         //<editor-fold>
@@ -37,10 +42,7 @@ public class Carrinho implements Logica {
             item.setProduto(produto);
             item.setQuant(1);
             item.setValorItens();
-            //Cria novo Pedido;
-            Pedido pedido = new Pedido();
-            //Adiciona item no Pedido
-            item.setPedido(pedido);
+
             //Cria uma lista com itens na sessão "itens"
             List<Item> itens = (List<Item>) carrinho.getAttribute("itens");
             //Se a sessão de "itens" for null. Cria uma nova lista;
@@ -72,7 +74,7 @@ public class Carrinho implements Logica {
             CtrlProduto ctrlProduto = new CtrlProduto();
 
             String quant[] = req.getParameterValues("quant");
-            
+
             //Cria uma lista com itens na sessão "itens"
             List<Item> itens = (List<Item>) carrinho.getAttribute("itens");
             int x = 0;
@@ -81,14 +83,14 @@ public class Carrinho implements Logica {
                 iten.setValorItens();
                 x++;
             }
-                        
+
             //Atualiza sessão com nova lista de itens. Agora atualizada
-            carrinho.setAttribute("itens",itens);
-           
+            carrinho.setAttribute("itens", itens);
+
             //Retorna para o carrinho
             pagina = "index.jsp?p=carrinho";
         }//</editor-fold>
-        
+
         //Ação para Remover Produto 
         //<editor-fold>
         if (req.getParameter("action").equals("remove")) {
@@ -98,12 +100,45 @@ public class Carrinho implements Logica {
             List<Item> itens = (List<Item>) carrinho.getAttribute("itens");
             //Remove item da lista de Itens
             itens.remove(Integer.parseInt(req.getParameter("index")));
-            
+
             //Atualiza sessão com nova lista de itens. Agora atualizada
-            carrinho.setAttribute("itens",itens);
+            carrinho.setAttribute("itens", itens);
 
             //Pega tamanho da lista do carrinho
             carrinho.setAttribute("tamanho", itens.size());
+
+            //Retorna para o carrinho
+            pagina = "index.jsp?p=carrinho";
+        }//</editor-fold>
+
+        //Ação para Comprar Produtos 
+        //<editor-fold>
+        if (req.getParameter("action").equals("compra")) {
+            CtrlCliente ctrlCliente = new CtrlCliente();
+            CtrlPedido ctrlPedido = new CtrlPedido();
+            CtrlItem ctrlItem = new CtrlItem();
+
+            if (user == null) {
+                pagina = "index.jsp?p=login";
+            } else {
+                //Busca cliente no banco pelo ID
+                Cliente cliente = ctrlCliente.buscaID((Long) user.getAttribute("id"));
+                //Cria novo Pedido;
+                Pedido pedido = new Pedido();
+                //Adicionando Cliente
+                pedido.setCliente(cliente);
+                //Cadastrar Pedidos no Banco
+                ctrlPedido.salvar(pedido);
+                //Cria uma lista com itens na sessão "itens"
+                List<Item> itens = (List<Item>) carrinho.getAttribute("itens");
+                //Cadastrar no banco os itens da lista
+                for (Item iten : itens) {
+                    iten.setPedido(pedido);
+                    ctrlItem.salvar(iten);
+                }
+
+            }
+
             
             //Retorna para o carrinho
             pagina = "index.jsp?p=carrinho";
