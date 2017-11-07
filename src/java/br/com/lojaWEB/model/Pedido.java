@@ -99,7 +99,7 @@ public class Pedido implements Serializable {
     }
 
     public void setTotal() {
-        total = total + frete;
+        total = valor + frete;
     }
 
     public boolean isFechado() {
