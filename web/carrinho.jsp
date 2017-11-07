@@ -13,7 +13,7 @@
             </p>
             <p class=" col-md-6 text-right">
                 <button class="btn btn-danger">Realizar Pagamento</button>
-                <input type="hidden" value='<f:formatNumber minFractionDigits="2" currencySymbol="R$">${pedido.total}</f:formatNumber>' name="total" class="form-control campo" id="total" disabled> 
+                <input type="hidden" value='<f:formatNumber minFractionDigits="2" currencySymbol="R$">${total}</f:formatNumber>' name="total" class="form-control campo" id="total" disabled> 
 
             </p>
         </div>
@@ -77,10 +77,10 @@
     </div>
     <div class="col-md-4 well">
         <strong>
-            <p>Produtos: <f:formatNumber minFractionDigits="2" currencySymbol="R$">${pedido.valor}</f:formatNumber></p>
-            <p>Frete(?): <f:formatNumber minFractionDigits="2" currencySymbol="R$">${pedido.frete}</f:formatNumber></p>
+            <p>Produtos: <f:formatNumber minFractionDigits="2" currencySymbol="R$">${total}</f:formatNumber></p>
+            <p>Frete(?): <f:formatNumber minFractionDigits="2" currencySymbol="R$">${frete}</f:formatNumber></p>
         </strong>
-        <h3 style="border-top: solid 2px #222;padding: 10px 0">Total:<f:formatNumber minFractionDigits="2" currencySymbol="R$">${pedido.total}</f:formatNumber></h3>
+        <h3 style="border-top: solid 2px #222;padding: 10px 0">Total:<f:formatNumber minFractionDigits="2" currencySymbol="R$">${total+frete}</f:formatNumber></h3>
 
             <p><strong>Possui cupom ou vale? </strong>Você poderá usá-los na etapa de pagamento.</p>
     </div>

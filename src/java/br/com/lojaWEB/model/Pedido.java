@@ -1,4 +1,3 @@
-
 package br.com.lojaWEB.model;
 
 import java.io.Serializable;
@@ -17,7 +16,7 @@ public class Pedido implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
     public Long getId() {
@@ -52,21 +51,21 @@ public class Pedido implements Serializable {
     public String toString() {
         return "br.com.lojaWEB.model.Pedido[ id=" + id + " ]";
     }
-    
+
     //Atributos
     @Temporal(TemporalType.TIMESTAMP)
     private Calendar dataPedido;
-    
+
     private double valor;
     private double frete;
     private double total;
-    
+
     @Column(nullable = false)
     private boolean fechado;
-    
+
     @Column(nullable = false)
     private boolean pago;
-   
+
     @OneToOne
     private Cliente cliente;
 
@@ -99,8 +98,8 @@ public class Pedido implements Serializable {
         return total;
     }
 
-    public void setTotal(double total) {
-        this.total = total;
+    public void setTotal() {
+        total = total + frete;
     }
 
     public boolean isFechado() {
@@ -126,6 +125,5 @@ public class Pedido implements Serializable {
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
     }
-    
-    
+
 }

@@ -9,7 +9,11 @@ import br.com.lojaWEB.model.Item;
 import br.com.lojaWEB.model.Pedido;
 import br.com.lojaWEB.model.Produto;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.Locale;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -59,6 +63,8 @@ public class Carrinho implements Logica {
             if (cont == 0) {
                 //Atualiza sessão com nova lista de itens. Agora atualizada
                 carrinho.setAttribute("itens", adicionarProduto(itens, item));
+                carrinho.setAttribute("total", calculaTotal(itens));
+                carrinho.setAttribute("frete", calculaFrete());
             }
 
             //Pega tamanho da lista do carrinho
@@ -83,6 +89,8 @@ public class Carrinho implements Logica {
 
             //Atualiza sessão com nova lista de itens. Agora atualizada
             carrinho.setAttribute("itens", itens);
+            carrinho.setAttribute("total", calculaTotal(itens));
+            carrinho.setAttribute("frete", calculaFrete());
 
             //Retorna para o carrinho
             pagina = "index.jsp?p=carrinho";
@@ -98,7 +106,8 @@ public class Carrinho implements Logica {
 
             //Atualiza sessão com nova lista de itens. Agora atualizada
             carrinho.setAttribute("itens", itens);
-
+            carrinho.setAttribute("total", calculaTotal(itens));
+            carrinho.setAttribute("frete", calculaFrete());
             //Pega tamanho da lista do carrinho
             carrinho.setAttribute("tamanho", itens.size());
 
@@ -118,19 +127,29 @@ public class Carrinho implements Logica {
             } else {
                 //Busca cliente no banco pelo ID
                 Cliente cliente = ctrlCliente.buscaID((Long) user.getAttribute("id"));
-                //Cria novo Pedido;
-                Pedido pedido = new Pedido();
-                //Adicionando Cliente
-                pedido.setCliente(cliente);
-                //Cadastrar Pedidos no Banco
-                ctrlPedido.salvar(pedido);
                 //Cria uma lista com itens na sessão "itens"
                 List<Item> itens = (List<Item>) carrinho.getAttribute("itens");
+                //Cria novo Pedido;
+                Pedido pedido = new Pedido();
+
+                //Adicionando: Cliente, total produto , frete e calculo de totaldo pedido
+                pedido.setCliente(cliente);
+                Calendar dt = new GregorianCalendar(Locale.ROOT);
+                pedido.setDataPedido(dt);
+                pedido.setFrete(calculaFrete());
+                pedido.setValor(calculaTotal(itens));
+                pedido.setTotal();
+                pedido.setFechado(true);
+                //Cadastrar Pedidos no Banco
+                ctrlPedido.salvar(pedido);
+
                 //Cadastrar no banco os itens da lista
                 for (Item iten : itens) {
                     iten.setPedido(pedido);
                     ctrlItem.salvar(iten);
                 }
+                carrinho.invalidate();
+
             }
         }//</editor-fold>
 
@@ -146,5 +165,17 @@ public class Carrinho implements Logica {
 
         itens.add(i);
         return itens;
+    }
+
+    private double calculaFrete() {
+        return 50;
+    }
+
+    private double calculaTotal(List<Item> itens) {
+        double total = 0;
+        for (Item iten : itens) {
+            total += iten.getValorItens();
+        }
+        return total;
     }
 }
